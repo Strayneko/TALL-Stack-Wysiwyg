@@ -10,6 +10,9 @@
                         #
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Author
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Title
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -27,6 +30,9 @@
                             class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
                             {{ ($posts->currentpage() - 1) * $posts->perpage() + $loop->index + 1 }}
                         </th>
+                        <td class="px-6 py-4">
+                            {{ $post->author->name ?? '-' }}
+                        </td>
                         <td class="px-6 py-4">
                             {{ $post->title ?? '-' }}
                         </td>
