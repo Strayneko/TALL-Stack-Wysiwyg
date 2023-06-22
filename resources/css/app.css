@@ -5,3 +5,7 @@
 [x-cloak] {
     display: none;
 }
+
+#addPost .ck-editor__editable {
+    @apply min-h-[11.25rem];
+}
