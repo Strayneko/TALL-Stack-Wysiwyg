@@ -25,6 +25,8 @@
             <input type="text" id="first_name"
                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="John" wire:model.lazy="post.title" required>
+
+            <x-form.error model="post.title" />
         </div>
 
         {{-- ckeditor --}}
@@ -33,6 +35,7 @@
                 Body</label>
             <textarea x-cloak id="postBody" wire:model.lazy="post.body"></textarea>
         </div>
+        <x-form.error model="post.body" />
 
         <div class="w-1/3">
             <x-form.button type="danger" @click.prevent="location.href=`{{ route('post.index') }}`">
