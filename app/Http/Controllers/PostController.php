@@ -17,4 +17,14 @@ class PostController extends Controller
     {
         return view('post.create');
     }
+
+    public function show(string $slug): View
+    {
+        return view('post.show', compact('slug'));
+    }
+
+    public function edit(string $slug): View
+    {
+        return view('post.edit', compact('slug'));
+    }
 }

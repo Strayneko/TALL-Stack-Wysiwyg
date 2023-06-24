@@ -10,6 +10,7 @@ class CreatePost extends Component
 {
 
     public Post $post;
+    public $editor = 0;
 
     private PostService $postService;
 
@@ -38,7 +39,7 @@ class CreatePost extends Component
 
         $this->dispatchBrowserEvent('post:submitted');
 
-        return redirect()->route('post.index')->with('New Post has been added.');
+        return redirect()->route('post.index')->with('success', 'New Post has been added.');
     }
 
     public function render()

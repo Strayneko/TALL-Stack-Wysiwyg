@@ -33,5 +33,7 @@ Route::middleware([
     Route::controller(PostController::class)->prefix('post')->name('post.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
+        Route::get('/show/{slug}', 'show')->name('show');
+        Route::get('/edit/{slug}', 'edit')->name('edit');
     });
 });

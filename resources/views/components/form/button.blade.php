@@ -1,5 +1,5 @@
 @props([
-    'type' => 'primary',
+    'buttonType' => 'primary',
 ])
 
 {{-- define button type class --}}
@@ -12,7 +12,7 @@
 @endphp
 
 <x-button {{ $attributes->merge([
-    'class' => $classes[$type] ?? '',
+    'class' => $classes[$buttonType] ?? '',
 ]) }}>
     {{ $slot }}
 </x-button>

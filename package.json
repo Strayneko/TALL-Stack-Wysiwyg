@@ -22,6 +22,10 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@ckeditor/ckeditor5-build-classic": "^38.0.1"
+        "@ckeditor/ckeditor5-build-classic": "^38.0.1",
+        "@ckeditor/ckeditor5-image": "^38.0.1",
+        "@ckeditor/ckeditor5-upload": "^38.0.1",
+        "froala-editor": "^4.0.19",
+        "sweetalert2": "^11.7.12"
     }
 }

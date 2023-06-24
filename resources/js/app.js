@@ -4,9 +4,11 @@ import 'flowbite'
 import Alpine from 'alpinejs'
 import focus from '@alpinejs/focus'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import Swal from 'sweetalert2'
 
 window.Alpine = Alpine
 window.ClassicEditor = ClassicEditor
+window.Swal = Swal
 
 Alpine.plugin(focus)
 
