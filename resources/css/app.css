@@ -9,3 +9,7 @@
 #addPost .ck-editor__editable {
     @apply min-h-[11.25rem];
 }
+
+#editor .ql-editor {
+    @apply min-h-[11.25rem];
+}

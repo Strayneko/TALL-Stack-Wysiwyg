@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('/v1/upload', [ImageController::class, 'store'])->name('image.store');
+Route::post('/v1/destroy', [ImageController::class, 'destroy'])->name('image.destroy');

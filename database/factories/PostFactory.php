@@ -16,9 +16,10 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
             'title'   => fake()->words(5, true),
-            'body'    => fake()->paragraphs(10, true),
+            'body'    => '<p>' . implode('</p><p>', fake()->paragraphs(10)) . '</p>',
             'slug'    => fake()->slug(),
             'user_id' => fake()->numberBetween(1, 11),
             'image'   => null,

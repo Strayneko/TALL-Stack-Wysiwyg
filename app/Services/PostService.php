@@ -42,9 +42,46 @@ class PostService
 
     public function getPosts(bool $isPaginate = false, int $pagination = 10, bool $asQuery = false): Collection | LengthAwarePaginator | null
     {
-        $query = $this->query()->with('author');
+        $query = $this->query()->with('author')->latest();
 
         if ($isPaginate) return $query->paginate($pagination);
         return $query->get();
+    }
+
+    public function findOne(string $slug): ?Post
+    {
+        $post = $this->query()->with('author')->where('slug', $slug)->first();
+        if (is_null($post)) {
+            throw new Exception("No post found with slug = {$slug}");
+        }
+
+        return $post;
+    }
+
+    public function update(null | Post | array $data, ?string $slug = null)
+    {
+        if (is_null($data)) {
+            throw new Exception('Please provice update data!');
+        }
+
+        try {
+            if ($data instanceof Post) {
+                $data->save();
+                return $data;
+            }
+
+            $this->findOne($slug)->update($data);
+        } catch (Exception $e) {
+            throw new Exception("Failed to execute the query, reason : {$e->getMessage()}");
+        }
+    }
+
+    public function delete(?string $slug, bool $forceDelete = false): ?bool
+    {
+        try {
+            return $this->findOne($slug)->delete();
+        } catch (Exception $e) {
+            throw new Exception("Failed to execute the query, reason: {$e->getMessage()}");
+        }
     }
 }

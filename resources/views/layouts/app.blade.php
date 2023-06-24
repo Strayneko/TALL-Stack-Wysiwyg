@@ -11,6 +11,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="{{ asset('js/froala-editor/css/froala_editor.pkgd.min.css') }}" rel="stylesheet"
+        type="text/css" />
+
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -45,6 +48,8 @@
     @livewireScripts
 
     @stack('scripts')
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+    <script type="text/javascript" src="{{ asset('js/froala-editor/js/froala_editor.pkgd.min.js') }}"></script>
 </body>
 
 </html>
