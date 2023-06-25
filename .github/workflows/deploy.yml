@@ -23,6 +23,6 @@ jobs:
         env:
           VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
       - name: Set current team
-        run: vapor team:switch Personal          
+        run: vapor team:switch       
       - name: Deploy Environment
         run: vapor deploy
