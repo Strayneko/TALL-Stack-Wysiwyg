@@ -19,12 +19,8 @@ jobs:
       - name: Require Vapor CLI
         run: composer global require laravel/vapor-cli
       - name: Install Project Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
-      - name: Authenticate with Vapor
-        run: vapor login
-        env:
-          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
-      - name: Set current vapor team
-        run: vapor team:switch       
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader  
       - name: Deploy Environment
         run: vapor deploy
+        env:
+          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
