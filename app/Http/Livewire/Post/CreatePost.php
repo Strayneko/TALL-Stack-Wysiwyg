@@ -15,7 +15,7 @@ class CreatePost extends Component
     private PostService $postService;
 
     protected $rules = [
-        'post.title' => 'required',
+        'post.title' => 'required|max:255',
         'post.body' => 'required',
     ];
 
