@@ -14,6 +14,9 @@
         // initialize ckeditor5
         window.ckeditor = await ClassicEditor.create(document.querySelector('#{{ $id }}'), {
             height: 900,
+            ckfinder: {
+                uploadUrl: `{{ route('image.store') }}?type=ckeditor`
+            }
         })
 
         if (this.isUpdate) {
