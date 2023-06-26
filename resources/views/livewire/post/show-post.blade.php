@@ -1,7 +1,8 @@
 {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
 <div class="py-10" x-data>
     <div class="-mt-10">
-        <x-form.button @click.prevent="location.href=`{{ route('post.index') }}`" class="gap-1">
+        @php($url = request()->query('from') === 'dashboard' ? route('dashboard') : route('post.index'))
+        <x-form.button @click.prevent="location.href=`{{ $url }}`" class="gap-1">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="h-6 w-6">
