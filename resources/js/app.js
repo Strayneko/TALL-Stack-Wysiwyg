@@ -10,7 +10,6 @@ import CKEditorCustomUploadAdapter from './CKEditorCustomUploadAdapter'
 window.Alpine = Alpine
 window.ClassicEditor = ClassicEditor
 window.Swal = Swal
-console.log(CKEditorCustomUploadAdapter)
 
 Alpine.plugin(focus)
 
