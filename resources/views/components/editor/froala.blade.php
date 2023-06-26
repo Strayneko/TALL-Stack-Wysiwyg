@@ -58,7 +58,7 @@
                         for (message of err.response?.data?.messages) {
                             msgs += message + '\n'
                         }
-                        Swal.fire('Error!', msgs, 'error')
+                        {{-- Swal.fire('Error!', msgs, 'error') --}}
                         return;
                     }
                 })
