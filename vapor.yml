@@ -1,12 +1,12 @@
-id: 48843
+id: 48981
 name: wysiwyg
 environments:
   production:
     memory: 1024
     cli-memory: 512
     runtime: 'php-8.2:al2'
-    database: 'Wysiwyg'
+    database: Wysiwyg
     build:
-      - 'composer install --no-dev'
+      - 'composer install'
       - 'php artisan event:cache'
       - 'npm i && npm run build && rm -rf node_modules'

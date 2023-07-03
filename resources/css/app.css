@@ -13,3 +13,72 @@
 #editor .ql-editor {
     @apply min-h-[11.25rem];
 }
+
+.ck-content h1,
+.fr-view h1 {
+    @apply text-[2em];
+}
+
+.ck-content h2,
+.fr-view h2 {
+    @apply text-[1.5em];
+}
+
+.ck-content h3,
+.fr-view h3 {
+    @apply text-[1.17em];
+}
+
+.ck-content h4,
+.fr-view h4 {
+    @apply text-[1em];
+}
+
+.ck-content h5,
+.fr-view h5 {
+    @apply text-[.83em];
+}
+
+.ck-content h6,
+.fr-view h6 {
+    @apply text-[.67en];
+}
+
+.fr-view ul,
+.ck-content ul {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+.fr-view ol,
+.ck-content ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+}
+.fr-view ul ul,
+.fr-view ol ul,
+.ck-content ol ul,
+.ck-content ul ul {
+    list-style-type: circle;
+    list-style-position: inside;
+    margin-left: 15px;
+}
+.fr-view ol ol,
+.fr-view ul ol,
+.ck-content ol ol,
+.ck-content ul ol {
+    list-style-type: lower-latin;
+    list-style-position: inside;
+    margin-left: 15px;
+}
+
+#modal-container {
+    @apply max-w-5xl;
+}
+
+[x-data='LivewireUIModal()'] {
+    @apply z-0;
+}
+
+.tox-dialog {
+    @apply relative z-[99999];
+}

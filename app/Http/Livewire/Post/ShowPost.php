@@ -2,10 +2,14 @@
 
 namespace App\Http\Livewire\Post;
 
+use Parsedown;
+use Throwable;
 use App\Models\Post;
 use Livewire\Component;
+use Dotenv\Parser\Parser;
+use Illuminate\Support\Str;
 use App\Services\PostService;
-use Throwable;
+use Illuminate\Mail\Markdown;
 
 class ShowPost extends Component
 {
