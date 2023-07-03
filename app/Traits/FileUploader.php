@@ -15,45 +15,54 @@ trait FileUploader
         return Storage::getDefaultDriver();
     }
 
-    public function uploadFile($fileRequestName, $location = 'post_attachments'): array
-    {
-
-
+    public function uploadFile(
+        $fileRequestName,
+        $location = 'post_attachments'
+    ): array {
         try {
             $fileRequest = request()->file($fileRequestName);
-            if (is_null($fileRequest)) throw new Exception('File not found!');
+            if (is_null($fileRequest)) {
+                throw new Exception('File not found!');
+            }
 
-            $file  = $fileRequest->store($location);
-            $link  =  $this->getUploadedFile($file);
+            $file = $fileRequest->store($location);
+            $link = $this->getUploadedFile($file, true);
 
             if ($this->getStorageDriver() === 'local') {
                 $file = $fileRequest->store($location, 'public');
                 $link = $this->buildLocalFileName($file);
             }
         } catch (Exception $e) {
-            throw new Exception("Failed to upload the file, reason: {$e->getMessage()}");
+            throw new Exception(
+                "Failed to upload the file, reason: {$e->getMessage()}"
+            );
         }
 
         return [
             'fileName' => $file,
-            'url'  => $link,
+            'url' => $link,
         ];
     }
 
-    public function getUploadedFile($file): string
+    public function getUploadedFile($file, bool $permanentUrl = false): string
     {
         if (!Storage::exists($file)) {
             throw new Exception('File not found!');
         }
 
         $ttl = now()->addHour();
-        Cache::put('image_' . $file, Storage::temporaryUrl($file, $ttl), $ttl);
+        $url = $permanentUrl
+            ? Storage::url($file)
+            : Storage::temporaryUrl($file, $ttl);
+        Cache::put('image_' . $file, $url, $ttl);
         return Cache::get('image_' . $file) ?? $file;
     }
 
     public function buildLocalFileName(string $fileName): string
     {
-        return Str::of($fileName)->prepend(request()->getSchemeAndHttpHost() . '/');
+        return Str::of($fileName)->prepend(
+            request()->getSchemeAndHttpHost() . '/'
+        );
     }
 
     public function getStorageClass(): Filesystem
@@ -72,9 +81,11 @@ trait FileUploader
         }
 
         try {
-            return ($this->getStorageClass()->delete($file));
+            return $this->getStorageClass()->delete($file);
         } catch (Exception $e) {
-            throw new Exception("Failed to delete the image, reason: {$e->getMessage()}");
+            throw new Exception(
+                "Failed to delete the image, reason: {$e->getMessage()}"
+            );
         }
     }
 }

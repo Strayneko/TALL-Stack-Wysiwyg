@@ -1,5 +1,5 @@
 {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
-<div class="py-10" x-data>
+<div class="py-10 fr-view ck-content mb-20" x-data>
     <div class="-mt-10">
         @php($url = request()->query('from') === 'dashboard' ? route('dashboard') : route('post.index'))
         <x-form.button @click.prevent="location.href=`{{ $url }}`" class="gap-1">
@@ -19,17 +19,16 @@
             <div class="mx-auto mt-2 flex items-center justify-center gap-4">
                 <small class="text-sm text-gray-500">Posted by:
                     {{ $post->author?->name }}</small>
-                <time
-                    class="inline-block text-sm text-gray-600">{{ $post->created_at?->diffForHumans() }}</time>
+                <time class="inline-block text-sm text-gray-600">{{ $post->created_at?->diffForHumans() }}</time>
             </div>
 
         </div>
     </div>
 
     <div>
-        <div class="mx-auto mt-10 h-80 w-3/4">
+        <div class="mx-auto mt-10 h-72 overflow-hidden w-3/4">
             <img src="{{ $post->image ?? 'https://source.unsplash.com/1200x400/?blog' }}"
-                class="rounded-lg object-cover object-center shadow" lazy alt="Post Image" />
+                class="rounded-lg object-contain object-center shadow" lazy alt="Post Image"/>
         </div>
     </div>
 

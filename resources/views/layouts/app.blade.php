@@ -46,10 +46,14 @@
     @stack('modals')
 
     @livewireScripts
+    @livewire('livewire-ui-modal')
+
 
     @stack('scripts')
     <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
     <script type="text/javascript" src="{{ asset('js/froala-editor/js/froala_editor.pkgd.min.js') }}"></script>
+    <script type="text/javascript" src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
 </body>
 
 </html>

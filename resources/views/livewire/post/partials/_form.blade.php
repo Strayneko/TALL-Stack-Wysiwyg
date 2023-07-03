@@ -2,6 +2,11 @@
     postBody: null,
     editor: 0,
     titleRef: null,
+    changeEditor(editor){
+        this.editor = editor
+        this.postBody = null
+        
+    },
     async submit() {
         await $wire.set('post.body', this.postBody)
         $wire.call('store')
@@ -11,11 +16,16 @@
         $wire.call('update')
     }
 }">
+@php($class = [
+    'w-1/2',
+    'w-5/6' => $type === 'edit',
+    'relative z-50',
+])
     <h1 class="text-3xl font-bold dark:text-gray-300">{{ $type === 'store' ? 'Add' : 'Edit' }} Post</h1>
     @include('livewire.post.partials._editor-selector')
 
     <form action="" class="mt-4 space-y-4">
-        <div class="w-1/2">
+        <div @class($class)>
             <label for="postTitle" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Post
                 Title</label>
             <input type="text" id="postTitle"
@@ -24,7 +34,7 @@
             <x-form.error model="post.title" />
         </div>
 
-        <div x-show="editor == 0">
+        <div x-show="editor == 0" @class($class)>
             {{-- ckeditor --}}
             @if ($type === 'edit')
                 <x-editor.ckeditor model="post.body" id="postBody" label="Post Body" :isUpdate="true"
@@ -33,11 +43,12 @@
                 <x-editor.ckeditor model="post.body" id="postBody" label="Post Body" />
             @endif
         </div>
-        <div x-show="editor == 1">
+        <div x-show="editor == 1" @class($class)>
             {{-- tinymce --}}
             <x-editor.tinymce model="post.body" id="postBody1" label="Post Body" />
         </div>
-        <div x-show="editor == 2">
+
+        <div x-show="editor == 2" @class($class)>
             {{-- froala --}}
             <x-editor.froala model="post.body" id="postBody2" label="Post Body" />
         </div>

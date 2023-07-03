@@ -1,30 +1,31 @@
 {{-- TINYMCE 6 --}}
 @props(['id', 'label', 'model', 'isUpdate' => false, 'updateData' => null])
 @push('scripts')
-    <script>
-        window.addEventListener('alpine:init', () => {
-            window.uploadHandler = (blobInfo, progress) => new Promise((resolve, reject) => {
-                const formData = new FormData();
-                formData.append('post_attachment', blobInfo.blob(), blobInfo.filename());
-
-                // Use Axios to perform the file upload
-                axios.post(`{{ route('image.store') }}`, formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then((res) => {
-                        // Handle successful upload
-                        resolve(res.data.link);
-                    })
-                    .catch((err) => {
-                        // Handle upload error
-                        reject('Error uploading file: ' + err.message);
-                    });
+<script>
+    window.addEventListener('alpine:init', () => {
+        window.uploadHandler = (blobInfo, progress) => new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append('post_attachment', blobInfo.blob(), blobInfo.filename());
+            
+            // Use Axios to perform the file upload
+            axios.post(`{{ route('image.store') }}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+                })
+                .then((res) => {
+                    // Handle successful upload
+                    resolve(res.data.link);
+                })
+                .catch((err) => {
+                    // Handle upload error
+                    reject('Error uploading file: ' + err.message);
+                });
             })
         })
     </script>
 @endpush
+
 <div x-data="{
     isUpdate: '{{ $isUpdate }}',
     tinymceEditor: null,
@@ -36,7 +37,27 @@
         })
     },
     async initTinyMce() {
-        imageUploadHandler = window.uploadHandler
+        imageUploadHandler = (blobInfo, progress) => new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append('post_attachment', blobInfo.blob(), blobInfo.filename());
+            
+            // Use Axios to perform the file upload
+            axios.post(`{{ route('image.store') }}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+                })
+                .then((res) => {
+                    // Handle successful upload
+                    resolve(res.data.link);
+                })
+                .catch((err) => {
+                    // Handle upload error
+                    reject('Error uploading file: ' + err.message);
+                });
+            })
+
+        tinymce.remove()
         await tinymce.init({
             selector: 'textarea#{{ $id }}',
             plugins: 'image',
@@ -45,6 +66,7 @@
             setup: (editor) => {
                 editor.on('init', (e) => {
                     this.tinymceEditor = editor
+                    window.coba = editor
                 })
                 editor.on('keyup', (e) => {
                     this.postBody = editor.getContent()
@@ -54,13 +76,11 @@
                 });
             }
         });
+       }
 
-        this.syncData()
-    }
-}" x-init="await initTinyMce();"
-    {{ $attributes->merge([
-        'class' => 'w-1/2',
-    ]) }}>
+    
+}" x-init="await initTinyMce();">
+
     <div wire:ignore>
         <label for="{{ $id }}" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
             {{ $label }}

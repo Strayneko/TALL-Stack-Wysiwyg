@@ -6,15 +6,17 @@ use App\Models\Post;
 use Livewire\Component;
 use App\Services\PostService;
 use Throwable;
+use LivewireUI\Modal\ModalComponent;
 
-class EditPost extends Component
+class EditPost extends ModalComponent
 {
     public ?Post $post;
     public string $slug;
+    public int $loopIndex;
 
     protected $rules = [
         'post.title' => 'required|max:255',
-        'post.body'  => 'required'
+        'post.body' => 'required',
     ];
 
     private PostService $postService;
@@ -42,7 +44,19 @@ class EditPost extends Component
         $this->post = new Post();
         $this->dispatchBrowserEvent('post:submitted');
 
-        return redirect()->route('post.index')->with('success', 'Post has been updated successfully.');
+        return redirect()
+            ->route('post.index')
+            ->with('success', 'Post has been updated successfully.');
+    }
+
+    public static function modalMaxWidth(): string
+    {
+        return '6xl';
+    }
+
+    public static function dispatchCloseEvent(): bool
+    {
+        return true;
     }
 
     public function render()
