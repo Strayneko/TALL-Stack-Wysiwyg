@@ -42,4 +42,5 @@ A simple Post CRUD with few of Wysiwyg use with laravel livewire
 
 ```bash
     php artisan serve
+    yarn dev / npm run dev
 ```
